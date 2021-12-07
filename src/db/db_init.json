@@ -1,0 +1,36 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstname": "oussema",
+      "lasttname": "heny",
+      "email": "oussemaheny@gmail.com",
+      "password": "oussema123",
+      "role": "student"
+    },
+    {
+      "id": 2,
+      "firstname": "malek",
+      "lasttname": "dorgham",
+      "email": "malekdorgham@yahoo.com",
+      "password": "malek123",
+      "role": "student"
+    },
+    {
+      "id": 3,
+      "firstname": "firas",
+      "lasttname": "dahmani",
+      "email": "firasdahmani@outlook.com",
+      "password": "firas123",
+      "role": "teacher"
+    },
+    {
+      "id": 4,
+      "firstname": "adnene",
+      "lasttname": "rouatbi",
+      "email": "adnenerouatbi@gmail.com",
+      "password": "adnene123",
+      "role": "admin"
+    }
+  ]
+}
