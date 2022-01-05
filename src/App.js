@@ -14,10 +14,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUserByEmail } from "./api/UserApi";
 import { setUser } from "./features/user/userSlice";
 import { setExams } from "./features/exams/examsSlice";
+import { setQuestions } from "./features/questions/questionsSlice";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 import { getStudentExams, getTeacherExams } from "./api/ExamApi";
 import Teacher from "./pages/teacher/Teacher";
+import StartExam from "./pages/student/StartExam";
+import { getAllQuestions } from "./api/QuestionApi";
+import Admin from "./pages/admin/Admin";
 
 export const LoaderContext = createContext();
 
@@ -44,6 +48,13 @@ const App = () => {
           : user.role.toLowerCase()
           ? await getTeacherExams(user?.id)
           : [];
+      const questions =
+        user.role.toLowerCase() === "teacher"
+          ? await (
+              await getAllQuestions()
+            ).data
+          : [];
+      questions && dispatch(setQuestions(questions));
       exams && dispatch(setExams(exams));
       user && dispatch(setUser(user));
 
@@ -71,26 +82,23 @@ const App = () => {
             path="/login"
             element={!role ? <Login /> : <Navigate to="/" />}
           ></Route>
+          <Route path="/admin" element={<Admin />}></Route>
+          {/* <Route path="/teacher" element={<Teacher />}></Route> */}
           <Route
             path="/"
             element={
               !role ? (
                 <Navigate to="/login" />
               ) : (
-                <MainLayout>
-                  {role === "student" ? (
-                    <Student />
-                  ) : role === "teacher" ? (
-                    <Teacher />
-                  ) : (
-                    <Navigate to="/login" />
-                  )}
-                  {/* <h1>Welcome</h1> */}
-                </MainLayout>
+                <MainLayout
+                  children={
+                    role.toLowerCase() === "student" ? <Student /> : <Teacher />
+                  }
+                />
               )
             }
           ></Route>
-          <Route path="/*" element={<Navigate to="/" />}></Route>
+          {/* <Route path="/*" element={<Navigate to="/" />}></Route> */}
         </Routes>
       </Router>
     </LoaderContext.Provider>

@@ -8,10 +8,8 @@ import {
   TableRow,
 } from "@mui/material";
 import React from "react";
-import { useSelector } from "react-redux";
 
-const ExamList = () => {
-  const exams = useSelector(({ exams }) => exams);
+const ExamList = ({ exams }) => {
   const keys =
     Array.isArray(exams) && exams.length > 0 && Object.keys(exams[0]);
   const firstKey = keys && keys.shift();

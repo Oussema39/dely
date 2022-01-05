@@ -17,29 +17,12 @@
       "role": "student"
     },
     {
-      "id": 3,
-      "firstName": "firas",
-      "lastName": "dahmani",
-      "email": "firasdahmani@gmail.com",
-      "password": "firas123",
-      "role": "student"
-    },
-    {
       "id": 4,
       "firstName": "adnen",
       "lastName": "rouatbi",
       "email": "adnenrouatbi@gmail.com",
       "password": "adnen123",
       "role": "teacher"
-    },
-    {
-      "firstName": "Mokhles",
-      "lastName": "Ajimi",
-      "email": "mokhles@gmail.com",
-      "password": "mokhles123",
-      "confirmPassword": "mokhles123",
-      "role": "student",
-      "id": 5
     },
     {
       "firstName": "Teacher",
@@ -58,79 +41,83 @@
       "confirmPassword": "etudiant123",
       "role": "student",
       "id": 7
+    },
+    {
+      "firstName": "Eya",
+      "lastName": "jomli",
+      "email": "eyajomli@gmail.com",
+      "password": "eya12345",
+      "confirmPassword": "eya12345",
+      "role": "student",
+      "id": 8
     }
   ],
   "exam": [
     {
+      "id": 1,
       "title": "React Js",
       "date": "01/12/2021",
       "duration": 90,
       "note": 100,
       "teacher_id": 4,
-      "participants": [1, 2],
-      "questions": [
+      "participants": [
+        1,
+        2
+      ]
+    }
+  ],
+  "question": [
+    {
+      "question": "Question number one",
+      "options": [
         {
-          "question": "Question number one",
-          "options": [
-            {
-              "answer": "answer 1",
-              "true": false
-            },
-            {
-              "answer": "answer 2",
-              "true": false
-            },
-            {
-              "answer": "answer 3",
-              "true": true
-            },
-            {
-              "answer": "answer 4",
-              "true": false
-            }
-          ]
+          "answer": "answer 1_1"
         },
         {
-          "question": "Question number two",
-          "options": [
-            {
-              "answer": "answer 1",
-              "true": false
-            },
-            {
-              "answer": "answer 2",
-              "true": false
-            },
-            {
-              "answer": "answer 3",
-              "true": true
-            },
-            {
-              "answer": "answer 4",
-              "true": false
-            }
-          ]
+          "answer": "answer 2_1"
         },
         {
-          "question": "Question number one",
-          "options": [
-            {
-              "answer": "answer 1",
-              "true": false
-            },
-            {
-              "answer": "answer 2",
-              "true": false
-            },
-            {
-              "answer": "answer 3",
-              "true": true
-            },
-            {
-              "answer": "answer 4",
-              "true": false
-            }
-          ]
+          "answer": "answer 3_1",
+          "correct": true
+        },
+        {
+          "answer": "answer 4_1"
+        }
+      ]
+    },
+    {
+      "question": "Question number two",
+      "options": [
+        {
+          "answer": "answer 1_2",
+          "correct": "true"
+        },
+        {
+          "answer": "answer 2_2"
+        },
+        {
+          "answer": "answer 3_2"
+        },
+        {
+          "answer": "answer 4_2"
+        }
+      ]
+    },
+    {
+      "question": "Question number three",
+      "options": [
+        {
+          "answer": "answer 1_3"
+        },
+        {
+          "answer": "answer 2_3"
+        },
+        {
+          "answer": "answer 3_3"
+        },
+        {
+          "answer": "answer 4_3",
+          "correct": "true"
         }
       ]
     }

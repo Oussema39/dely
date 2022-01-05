@@ -1,13 +1,11 @@
 import React from "react";
-import { IconButton, InputAdornment } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useTheme } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
-import SearchIcon from "@mui/icons-material/Search";
-import CloseIcon from "@mui/icons-material/Close";
-import TextField from "@mui/material/TextField";
-import ExamList from "../../components/ExamList";
-import Section from "../../components/Section";
+
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import StartExam from "./StartExam";
+import StudentHome from "./StudentHome";
 
 const Student = () => {
   const theme = useTheme();
@@ -24,33 +22,16 @@ const Student = () => {
     >
       <Grid container spacing={2} justifyContent="center">
         <Grid item xs={10}>
-          <Section>
-            <TextField
-              type="text"
-              // value={search}
-              id="search"
-              fullWidth
-              placeholder="search for exams"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton edge="end">
-                      <CloseIcon />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </Section>
-
-          <Section>
-            <ExamList />
-          </Section>
+          <Link to="/student/startexam">Start Exam</Link>
+          <Link to="/what">Start Exam</Link>
+          <Routes>
+            <Route
+              path="/student/:examId"
+              element={<StartExam exam={{}} />}
+            ></Route>
+            <Route path="/student/:examId" element={<div>What</div>}></Route>
+            <Route path="/" element={<StudentHome />} />
+          </Routes>
         </Grid>
       </Grid>
     </Box>

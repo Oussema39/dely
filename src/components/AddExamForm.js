@@ -7,7 +7,13 @@ import Section from "./Section";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 import * as Yup from "yup";
+import StepperCopy from "./StepperCopy";
 
 const initialValues = {
   title: "",
@@ -38,90 +44,80 @@ const validatorYup = Yup.object().shape({
     ),
 });
 
-const AddExamForm = ({ setDisplayForm }) => {
+const ExamGeneralDataForm = () => {
   const [date, setDate] = useState(null);
-
   const onSubmit = (values, { resetForm }) => {
     console.log(values);
   };
 
-  const onCancel = (handleReset) => {
-    setDisplayForm(false);
-    handleReset();
-  };
+  return (
+    <Formik
+      initialValues={{ ...initialValues }}
+      validationSchema={validatorYup}
+      onSubmit={onSubmit}
+    >
+      {(formik) => (
+        <Form>
+          <FormTextField
+            margin="normal"
+            label="Exam Title"
+            name="title"
+            autoFocus
+          />
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DatePicker
+              label="Exam date"
+              value={date}
+              onChange={(newValue) => {
+                setDate(newValue);
+              }}
+              renderInput={(params) => (
+                <FormTextField name="date" margin="normal" {...params} />
+              )}
+            />
+          </LocalizationProvider>
+          <FormTextField
+            margin="normal"
+            name="duration"
+            type="number"
+            placehoder="mm"
+            label="Exam duration"
+          />
+
+          <FormTextField
+            margin="normal"
+            name="note"
+            type="number"
+            label="Exam note"
+          />
+        </Form>
+      )}
+    </Formik>
+  );
+};
+
+const AddExamForm = () => {
+  const [open, setOpen] = useState(true);
+
+  // const onCancel = (handleReset) => {
+  //   setDisplayForm(false);
+  //   handleReset();
+  // };
+
+  const handleClose = () => setOpen(false);
 
   return (
-    <Section>
-      <Typography component="h1" variant="h5">
-        Add Exam
-      </Typography>
-      <Formik
-        initialValues={{ ...initialValues }}
-        validationSchema={validatorYup}
-        onSubmit={onSubmit}
-      >
-        {(formik) => (
-          <Form>
-            <FormTextField
-              margin="normal"
-              label="Exam Title"
-              name="title"
-              autoFocus
-            />
-            {/* <FormTextField
-              margin="normal"
-              name="date"
-              type="date"
-              label="Exam date"
-            /> */}
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DatePicker
-                label="Exam date"
-                value={date}
-                onChange={(newValue) => {
-                  setDate(newValue);
-                }}
-                renderInput={(params) => (
-                  <FormTextField name="date" margin="normal" {...params} />
-                )}
-              />
-            </LocalizationProvider>
-            <FormTextField
-              margin="normal"
-              name="duration"
-              type="number"
-              placehoder="mm"
-              label="Exam duration"
-            />
-
-            <FormTextField
-              margin="normal"
-              name="note"
-              type="number"
-              label="Exam note"
-            />
-
-            <Button
-              type="submit"
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              // disabled={formik.isSubmitting}
-            >
-              Confirm exam
-            </Button>
-            <Button
-              variant="outlined"
-              color="error"
-              sx={{ mt: 3, mb: 2, ml: 2 }}
-              // disabled={formik.isSubmitting}
-              onClick={() => onCancel(formik.handleReset)}
-            >
-              Cancel
-            </Button>
-          </Form>
-        )}
-      </Formik>
-    </Section>
+    <Dialog fullWidth maxWidth="sm" open={open} onClose={handleClose}>
+      <DialogContent>
+        <StepperCopy components={[ExamGeneralDataForm]} />
+      </DialogContent>
+      {/* <DialogActions>
+        <Button color="error" onClick={handleClose}>
+          Cancel
+        </Button>
+        <Button onClick={handleClose}>Confirm Exam</Button>
+      </DialogActions> */}
+    </Dialog>
   );
 };
 export default AddExamForm;

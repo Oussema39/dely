@@ -4,7 +4,7 @@ const baseUrl = "http://localhost:3030";
 
 const targetUrl = (resource) => `${baseUrl}/${resource}`;
 
-const getAllUsers = async (signal) =>
+export const getAllUsers = async (signal) =>
   await axios.get(`${baseUrl}/user`, { signal });
 
 export const getUserByEmail = async (email) =>
@@ -27,4 +27,11 @@ export const login = async (user) => {
     ) || null;
   delete auth?.["password"];
   return auth;
+};
+
+export const deleteUser = async (id) => {
+  console.log("deleting");
+
+  const deleted = id && (await axios.delete(targetUrl(`user/${id}`))).data;
+  console.log(deleted);
 };
